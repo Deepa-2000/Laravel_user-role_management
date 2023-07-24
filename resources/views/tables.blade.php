@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('content')
 
+@if($message = Session::get('success'))
+
+<div class="alert alert-success">
+	{{ $message }}
+</div>
+
+@endif
+
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -13,7 +21,7 @@
             <div class="card-header py-3">
                 <div class="row">
                     <div class="col-10">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">All Loans</h6>
                     </div>
                     <div class="col-md-2">
                         <a href="{{'/loan'}}" class="btn btn-sm btn-secondary">+ Add New</a>
@@ -35,24 +43,33 @@
                                 <th>Interest_Rate</th>
                                 <th>Payments</th>
                                 <th>Account_Type</th>
-                                <th>Due_Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>7577866678</td>
-                                <td>Edinburgh</td>
-                                <td>61,000</td>
-                                <td>System Architect</td>
-                                <td>8%</td>
-                                <td>20</td>
-                                <td>current</td>
-                                <td>2011/04/25</td>
-                            </tr>
+                        @if(count($data) > 0)
 
+                        @foreach($data as $row)
+
+                            <tr>
+                                <td>{{ $row->name }}</td>
+                                <td>{{ $row->contact }}</td>
+                                <td>{{ $row->address }}</td>
+                                <td>{{ $row->amount }}</td>
+                                <td>{{ $row->position }}</td>
+                                <td>{{ $row->interest_rate }}</td>
+                                <td>{{ $row->payments }}</td>
+                                <td>{{ $row->account_type }}</td>
+                            </tr>
+                            @endforeach
+
+                            @else
+                            <tr>
+                                <td colspan="5" class="text-center">No Data Found</td>
+                            </tr>
                         </tbody>
+                        @endif
                     </table>
+                    {!! $data->links() !!}
                 </div>
             </div>
         </div>

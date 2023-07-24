@@ -22,11 +22,10 @@ Route::view('/loan','loan');
 Route::view('/cards','cards');
 Route::view('/tables','tables');
 Route::view('/charts','charts');
-Route::view('/forgot','forgot-password');
+Route::view('/forgot','forgot');
 Route::view('/404','404');
 Route::view('/blank','blank');
 Route::view('/buttons','buttons');
-Route::view('/colorutilies','utilities-color');
 
 
 Route::get('/',[UserController::class,'index'])->name('register');
@@ -39,4 +38,8 @@ Route::get('/edit_profile/{id}',[UserController::class,'edit_profile'])->name('e
 Route::put('/validate_profile/{id}',[UserController::class,'validate_profile'])->name('sample.validate_profile');
 
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
+
+Route::get('/tables',[UserController::class,'read_loans'])->name('tables');
+Route::post('/create_loans',[UserController::class,'create_loans'])->name('create_loans');
+
 

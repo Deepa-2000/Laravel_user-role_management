@@ -1,6 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+@if($errors->any())
+
+<div class="alert alert-danger">
+	<ul>
+	@foreach($errors->all() as $error)
+
+		<li>{{ $error }}</li>
+
+	@endforeach
+	</ul>
+</div>
+
+@endif
+
+
 <div class="container-fluid">
     <div class="row">
         <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
@@ -9,7 +24,7 @@
                 <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Loan Form</h1>
                 </div>
-                <form class="user" action="" method="post">
+                <form class="user" action="{{ route('create_loans') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <input type="name" name="name" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Enter the Name">
